@@ -71,23 +71,23 @@
             var spContainer = document.getElementById('sp');
 
             switch(button.innerHTML){
-                case 'Spanish':
-                    enContainer.style.display = 'none';
-                    spContainer.style.display = 'block';
-                    button.innerHTML = 'English';
-                    break;
-
                 case 'English':
                     enContainer.style.display = 'block';
                     spContainer.style.display = 'none';
-                    button.innerHTML = 'Spanish';
+                    button.innerHTML = 'Espa&ntilde;ol';
+                    break;
+
+                default:
+                    enContainer.style.display = 'none';
+                    spContainer.style.display = 'block';
+                    button.innerHTML = 'English';
                     break;
             }
         }
     </script>
 </head>
 <body>
-<button  onclick="toggleLanguage(this)">Spanish</button>
+<button  onclick="toggleLanguage(this)">Espa&ntilde;ol</button>
 <div id="en" class="container">
     <h1 style="text-align: center; color: #990000;">THIS IS A WORKING DRAFT.<br/>NOTHING TO SIGN.</h1>
     <a href="https://chat.whatsapp.com/K0yJyFvS5Dh95Rq0l9nVaj">Click or Scan<br>
