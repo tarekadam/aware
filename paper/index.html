@@ -9,11 +9,6 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        .container {
-            width: 540px;
-        }
-    </style>
 
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
@@ -27,6 +22,29 @@
 
             var canvas = document.getElementById('signature');
             var signaturePad = new SignaturePad(canvas);
+            var signatureData;
+
+            function resizeCanvas() {
+                // Store the current signature
+                signatureData = signaturePad.toData();
+
+                // Set the new width and height
+                var width = canvas.parentElement.offsetWidth;
+
+                var ratio = 3 / 1; // Adjust this to your preferred aspect ratio
+                var height = width / ratio;
+                canvas.width = width;
+                canvas.height = height;
+
+                // Redraw the signature
+                signaturePad.fromData(signatureData);
+            }
+
+            // Initial resize
+            resizeCanvas();
+
+            // Add the event listener
+            window.addEventListener('resize', resizeCanvas);
 
 
             $('#numberOfChildren').change(function () {
@@ -111,7 +129,7 @@
 
         <div class="form-group" style="text-align: center;">
 
-            <canvas style="border: 1px solid #ced4da;" id="signature" width="500" height="150"></canvas>
+            <canvas style="border: 1px solid #ced4da;" id="signature"></canvas>
             <input type="hidden" name="signatureImage" id="signatureImage">
             <br/>
             Signature / Firma
