@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Board Request</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .container {
+            width: 540px;
+        }
+    </style>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            var canvas = document.getElementById('signature');
+            var signaturePad = new SignaturePad(canvas);
+
+
+            $('#numberOfChildren').change(function () {
+                if ($(this).val() === '0') {
+                    $('#employeeDeclaration').prop('checked', true);
+                } else {
+                    $('#employeeDeclaration').prop('checked', false);
+                }
+            });
+
+            $('#userForm').submit(function (e) {
+                $('button[type="submit"]').attr('disabled', true);
+
+                e.preventDefault();
+
+                const signatureDataURL = signaturePad.toDataURL();
+                $('#signatureImage').val(signatureDataURL);
+
+                const formData = new FormData(this);
+
+                $.ajax({
+                    url: 'http://api.aware-parents.test',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        // Handle success
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Thank you for your support!',
+                            icon: 'success',
+                            confirmButtonText: 'Close',
+                            confirmButtonColor: '#007bff'
+                        })
+                    },
+                    error: function (error) {
+                        // Handle error
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Please try again later.',
+                            icon: 'error',
+                            confirmButtonText: 'Close',
+                            confirmButtonColor: '#ffc107'
+                        })
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <form id="userForm">
+        <div class="form-group">
+            <label for="fullName">Full Name / Nombre Completo:</label>
+            <input type="text" class="form-control" id="fullName" name="fullName" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email / Correo Electrónico:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="whatsapp">WhatsApp / WhatsApp:</label>
+            <input type="text" class="form-control" id="whatsapp" name="whatsapp" required>
+        </div>
+        <div class="form-group">
+            <label for="numberOfChildren">Number of Children / Número de Hijos:</label>
+            <select class="form-control" id="numberOfChildren" name="numberOfChildren">
+                <optgroup label="Number of Children / Número de Hijos">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5+</option>
+                </optgroup>
+                <optgroup label="Employee Option / Opción de Empleado">
+                    <option value="0">0</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="form-group" style="text-align: center;">
+
+            <canvas style="border: 1px solid #ced4da;" id="signature" width="500" height="150"></canvas>
+            <input type="hidden" name="signatureImage" id="signatureImage">
+            <br/>
+            Signature / Firma
+        </div>
+
+        <div class="form-group">
+            <p class="alert alert-info">Please choose the privacy option that best matches your situation.<br>
+                <i>Por favor, elija la opción de privacidad que mejor se adapte a su situación.</i></p>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="privacy" value="public" checked>
+                <label class="form-check-label">
+                    Your name and information may be shared with the board members.<br>
+                    <i>Su nombre e información pueden ser compartidos con los miembros de la junta.</i>
+                </label>
+            </div>
+            <hr/>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="privacy" value="private">
+                <label class="form-check-label">
+                    You wish to remain anonymous because you are afraid of retaliation. (job or scholarship loss, etc.)<br>
+                    <i>Desea permanecer anónimo porque teme represalias. (pérdida de trabajo o beca, etc.)</i>
+                </label>
+            </div>
+        </div>
+        <hr/>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="employeeDeclaration" name="employeeDeclaration"
+                   value="yes">
+            <label class="form-check-label" for="employeeDeclaration">
+                Check this box if you are an employee.<br>
+                <i>Marque esta casilla si es empleado.</i>
+            </label>
+        </div>
+
+        <div style="text-align: center; margin-top: 2em;">
+            <button type="submit" class="btn btn-primary">Submit / Enviar</button>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>
