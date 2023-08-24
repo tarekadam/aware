@@ -55,6 +55,10 @@
                 }
             });
 
+            $('#clearSignature').click(function () {
+                signaturePad.clear();
+            });
+
             $('#userForm').submit(function (e) {
                 $('button[type="submit"]').attr('disabled', true);
 
@@ -133,6 +137,9 @@
             <input type="hidden" name="signatureImage" id="signatureImage">
             <br/>
             Signature / Firma
+
+            <button type="button" id="clearSignature" class="btn btn-light" style="float: right; position: relative; top: -25px; right: 15px;">Clear / Borrar</button>
+
         </div>
 
         <div class="form-group">
