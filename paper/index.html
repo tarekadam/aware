@@ -11,7 +11,7 @@
             background-color: #ffffff !important;
         }
 
-        button:first-of-type {
+        button.trans {
             float: right;
             padding: 10px 20px;
             font-size: 16px;
@@ -24,7 +24,7 @@
             transition: background-color 0.3s, border-color 0.3s;
         }
 
-        button:first-of-type:hover  {
+        button.trans:hover  {
             background-color: #0056b3;
             border-color: #0056b3;
         }
@@ -44,9 +44,9 @@
         $(document).ready(function () {
 
             var canvas = document.getElementById('signature');
-            canvas.style.backgroundColor = "white";
+            canvas.style.backgroundColor = "#efefef";
             var signaturePad = new SignaturePad(canvas, {
-                backgroundColor: "white"
+                backgroundColor: "#efefef"
             });
             var signatureData;
 
@@ -147,7 +147,7 @@
 </head>
 <body>
 <div class="container">
-    <button onclick="toggleLanguage(this)">Espa&ntilde;ol</button>
+    <button class="trans" onclick="toggleLanguage(this)">Espa&ntilde;ol</button>
     <div id="en" class="container mt-5">
         <h1 class="text-center">August 23, 2023</h1>
         <h2 class="text-center">Board of Directors</h2>
