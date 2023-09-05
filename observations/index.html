@@ -31,6 +31,10 @@
     button.btn-danger {
       display: none !important;
     }
+    div.item {
+      border-bottom: 1px solid #cccccc;
+      padding: 10px;
+    }
   </style>
 
   <!-- CSS -->
@@ -55,8 +59,8 @@
           var spHtml = '';
 
           data.forEach(function(item) {
-            enHtml += '<div class="row mb-2"><div class="col-sm-10">' + item.en + '</div><div class="col-sm-2"><button class="btn btn-danger" onclick="deleteFile(\'' + item.file + '\')">Delete</button></div></div>';
-            spHtml += '<div class="row mb-2"><div class="col-sm-10">' + item.sp + '</div><div class="col-sm-2"><button class="btn btn-danger" onclick="deleteFile(\'' + item.file + '\')">Delete</button></div></div>';
+            enHtml += '<div class="item row mb-2"><div class="col-sm-10">' + item.en + '</div><div class="col-sm-2"><button class="btn btn-danger" onclick="deleteFile(\'' + item.file + '\')">Delete</button></div></div>';
+            spHtml += '<div class="item row mb-2"><div class="col-sm-10">' + item.sp + '</div><div class="col-sm-2"><button class="btn btn-danger" onclick="deleteFile(\'' + item.file + '\')">Delete</button></div></div>';
           });
 
           $('#en').html(enHtml);
