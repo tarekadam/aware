@@ -28,6 +28,9 @@
       background-color: #0056b3;
       border-color: #0056b3;
     }
+    button.btn-danger {
+      display: none !important;
+    }
   </style>
 
   <!-- CSS -->
@@ -121,10 +124,42 @@
           break;
       }
     }
+
+    function obfuscate(str) {
+      let obfuscated = '';
+      for (let i = 0; i < str.length; i++) {
+        obfuscated += String.fromCharCode(str.charCodeAt(i) + 3);
+      }
+      return obfuscated;
+    }
+
+    function checkPin() {
+      const enteredPin = document.getElementById('pin').value;
+      const obfuscatedPin = "4<;7";
+
+      if (obfuscate(enteredPin) === obfuscatedPin) {
+        document.getElementById('pinModal').style.display = 'none';
+        showProtectedElements();
+      } else {
+        alert('Wrong PIN');
+      }
+    }
+
+    function showProtectedElements() {
+      const form = document.getElementById('myForm');
+      form.style.display = 'block';
+
+      const style = document.createElement('style');
+      style.innerHTML = 'button.btn-danger { display: inline-block !important; }';
+      document.head.appendChild(style);
+
+      form.style.display = 'block';
+    }
   </script>
 </head>
 <body>
 <div class="container">
+
   <button class="trans" onclick="toggleLanguage(this)">Espa&ntilde;ol</button>
     <h1>Observations</h1>
   <div id="en" class="container mt-5">
@@ -137,7 +172,7 @@
 
 
   <div class="container mt-5">
-    <form id="myForm">
+    <form id="myForm" style="display: none;">
       <div class="form-group">
         <label for="en">English:</label>
         <textarea type="text" class="form-control" name="en"></textarea>
@@ -150,6 +185,14 @@
     </form>
   </div>
 
+
+  <div id="pinModal" style="display: block; text-align: center; margin-top: 3em;">
+
+      <label for="pin">Editing Features PIN:</label>
+      <input type="password" id="pin">
+      <button type="submit" onclick="checkPin()">Submit</button>
+
+  </div>
 </div>
 
 
