@@ -79,8 +79,8 @@
           data.forEach(function(item) {
             let diff = Math.max(0, item.up - item.down);
             let disabled = votedQuestions[item.file] ? 'disabled' : '';
-            enHtml += `<div class="item row mb-2"><div class="col-sm-8">${item.en}</div><div class="col-sm-2"><div class="btn-group" role="group"><button class="btn btn-outline-secondary" ${disabled} onclick="vote('${item.file}', 'UP')">&#128077;</button><button class="btn btn-outline-secondary" ${disabled} onclick="vote('${item.file}', 'DOWN')">&#128078;</button><button style="white-space: nowrap;" class="btn btn-outline-secondary" onclick="toggleTally(this, ${item.up}, ${item.down})"> ${diff}</button></div></div><div class="col-sm-2"><button class="btn btn-danger" onclick="deleteFile('${item.file}')">X</button></div></div>`;
-            spHtml += `<div class="item row mb-2"><div class="col-sm-8">${item.sp}</div><div class="col-sm-2"><div class="btn-group" role="group"><button class="btn btn-outline-secondary" ${disabled} onclick="vote('${item.file}', 'UP')">&#128077;</button><button class="btn btn-outline-secondary" ${disabled} onclick="vote('${item.file}', 'DOWN')">&#128078;</button><button style="white-space: nowrap;" class="btn btn-outline-secondary" onclick="toggleTally(this, ${item.up}, ${item.down})"> ${diff}</button></div></div><div class="col-sm-2"><button class="btn btn-danger" onclick="deleteFile('${item.file}')">X</button></div></div>`;
+            enHtml += `<div class="item row mb-2"><div class="col-sm-8">${item.en}</div><div class="col-sm-2"><div class="btn-group" role="group"><button class="btn btn-outline-secondary" style="display:none; "${disabled} onclick="vote('${item.file}', 'UP')">&#128077;</button><button class="btn btn-outline-secondary" style="display:none; "${disabled} onclick="vote('${item.file}', 'DOWN')">&#128078;</button><button style="white-space: nowrap;" class="btn btn-outline-secondary" onclick="toggleTally(this, ${item.up}, ${item.down})"> ${diff}</button></div></div><div class="col-sm-2"><button class="btn btn-danger" onclick="deleteFile('${item.file}')">X</button></div></div>`;
+            spHtml += `<div class="item row mb-2"><div class="col-sm-8">${item.sp}</div><div class="col-sm-2"><div class="btn-group" role="group"><button class="btn btn-outline-secondary" style="display:none; "${disabled} onclick="vote('${item.file}', 'UP')">&#128077;</button><button class="btn btn-outline-secondary" style="display:none; "${disabled} onclick="vote('${item.file}', 'DOWN')">&#128078;</button><button style="white-space: nowrap;" class="btn btn-outline-secondary" onclick="toggleTally(this, ${item.up}, ${item.down})"> ${diff}</button></div></div><div class="col-sm-2"><button class="btn btn-danger" onclick="deleteFile('${item.file}')">X</button></div></div>`;
           });
           $('#en').html(enHtml);
           $('#sp').html(spHtml);
@@ -220,7 +220,7 @@
   </div>
 
 
-  <div id="pinModal" style="display: block; text-align: center; margin-top: 3em;">
+  <div id="pinModal" style="display: none; text-align: center; margin-top: 3em;">
 
       <label for="pin">Editing Features PIN:</label>
       <input type="password" id="pin">
