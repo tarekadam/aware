@@ -54,7 +54,7 @@
         e.preventDefault();
         const formData = $(this).serialize();
         $.ajax({
-          url: 'http://api.aware-parents.test/questions/index.php',
+          url: 'https://api.aware-parents.com/questions/index.php',
           type: 'POST',
           data: formData,
           success: function(response) {
@@ -70,7 +70,7 @@
 
     function fetchData() {
       $.ajax({
-        url: 'http://api.aware-parents.test/questions/report.php',
+        url: 'https://api.aware-parents.com/questions/report.php',
         type: 'GET',
         success: function(data) {
           const votedQuestions = JSON.parse(localStorage.getItem('votedQuestions') || '{}');
@@ -103,7 +103,7 @@
 
     function deleteFile(fileName) {
       $.ajax({
-        url: 'http://api.aware-parents.test/questions/delete.php',
+        url: 'https://api.aware-parents.com/questions/delete.php',
         type: 'POST',
         data: { file: fileName },
         success: function(response) {
@@ -125,7 +125,7 @@
       localStorage.setItem('votedQuestions', JSON.stringify(votedQuestions));
 
       $.ajax({
-        url: 'http://api.aware-parents.test/questions/vote.php',
+        url: 'https://api.aware-parents.com/questions/vote.php',
         type: 'POST',
         data: { file: fileName, vote: type },
         success: function(response) {
