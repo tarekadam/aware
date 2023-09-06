@@ -155,6 +155,37 @@
           break;
       }
     }
+
+    function obfuscate(str) {
+      let obfuscated = '';
+      for (let i = 0; i < str.length; i++) {
+        obfuscated += String.fromCharCode(str.charCodeAt(i) + 3);
+      }
+      return obfuscated;
+    }
+
+    function checkPin() {
+      const enteredPin = document.getElementById('pin').value;
+      const obfuscatedPin = "4<;7";
+
+      if (obfuscate(enteredPin) === obfuscatedPin) {
+        document.getElementById('pinModal').style.display = 'none';
+        showProtectedElements();
+      } else {
+        alert('Wrong PIN');
+      }
+    }
+
+    function showProtectedElements() {
+      const form = document.getElementById('myForm');
+      form.style.display = 'block';
+
+      const style = document.createElement('style');
+      style.innerHTML = 'button.btn-danger { display: inline-block !important; }';
+      document.head.appendChild(style);
+
+      form.style.display = 'block';
+    }
   </script>
 
 
