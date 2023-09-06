@@ -136,6 +136,25 @@
         }
       });
     }
+
+    function toggleLanguage(button) {
+      var enContainer = document.getElementById('en');
+      var spContainer = document.getElementById('sp');
+
+      switch (button.innerHTML) {
+        case 'English':
+          enContainer.style.display = 'block';
+          spContainer.style.display = 'none';
+          button.innerHTML = 'Espa&ntilde;ol';
+          break;
+
+        default:
+          enContainer.style.display = 'none';
+          spContainer.style.display = 'block';
+          button.innerHTML = 'English';
+          break;
+      }
+    }
   </script>
 
 
