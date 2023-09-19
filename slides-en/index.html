@@ -21,6 +21,11 @@
         iframe.style.width = "100%";
         iframe.style.height = "100%";
     }
+
+    // Watch for window resize event
+    window.addEventListener("resize", () => {
+        resizeIframe();
+    });
 </script>
 </body>
 </html>
